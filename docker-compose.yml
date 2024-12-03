@@ -1,0 +1,61 @@
+services:
+  mongo1:
+    image: mongo:8.0.0
+    hostname: mongo1
+    container_name: mongo1
+    ports:
+      - 27017:27017
+    entrypoint: ["mongod", "--replSet", "myReplicaSet", "--bind_ip_all", "--port", "27017"]
+    volumes:
+      - mongo1_config:/data/configdb
+      - mongo1_db:/data/db
+
+  mongo2:
+    image: mongo:8.0.0
+    hostname: mongo2
+    container_name: mongo2
+    ports:
+      - 27018:27018
+    entrypoint: ["mongod", "--replSet", "myReplicaSet", "--bind_ip_all", "--port", "27018"]
+    volumes:
+      - mongo2_config:/data/configdb
+      - mongo2_db:/data/db
+
+  mongo3:
+    image: mongo:8.0.0
+    hostname: mongo3
+    container_name: mongo3
+    ports:
+      - 27019:27019
+    entrypoint: ["mongod", "--replSet", "myReplicaSet", "--bind_ip_all", "--port", "27019"]
+    volumes:
+      - mongo3_config:/data/configdb
+      - mongo3_db:/data/db
+
+  mongosetup:
+    image: mongo:8.0.0
+    depends_on:
+      - mongo1
+      - mongo2
+      - mongo3
+    restart: "no"
+    entrypoint: [ "bash", "/scripts/mongo_setup.sh"]
+    volumes:
+      - ./scripts:/scripts
+      - mongo4_config:/data/configdb
+      - mongo4_db:/data/db
+
+volumes:
+  mongo1_config:
+  mongo1_db:
+  mongo2_config:
+  mongo2_db:
+  mongo3_config:
+  mongo3_db:
+  mongo4_config:
+  mongo4_db:
+
+# put these lines on hosts
+# 127.0.0.1 mongo1
+# 127.0.0.1 mongo2
+# 127.0.0.1 mongo3
