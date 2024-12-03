@@ -55,7 +55,7 @@ volumes:
   mongo4_config:
   mongo4_db:
 
-# put these lines on hosts
+# To ensure the MongoDB instances can be resolved, add these entries to your hosts file:
 # 127.0.0.1 mongo1
 # 127.0.0.1 mongo2
 # 127.0.0.1 mongo3
