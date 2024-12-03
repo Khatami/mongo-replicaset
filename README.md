@@ -23,7 +23,9 @@ docker compose up -d
 To directly connect to individual MongoDB instances, use the following connection strings:
 
 ```bash
-mongodb://mongo1:27017/?directConnection=true mongodb://mongo2:27018/?directConnection=true mongodb://mongo3:27019/?directConnection=true
+mongodb://mongo1:27017/?directConnection=true 
+mongodb://mongo2:27018/?directConnection=true 
+mongodb://mongo3:27019/?directConnection=true
 ```
 
 ## Connect to the Replica Set
